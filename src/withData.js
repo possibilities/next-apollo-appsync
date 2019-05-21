@@ -39,6 +39,12 @@ export default (appSyncConfig) => {
             asPath: ctx.asPath,
             pathname: ctx.pathname,
           };
+
+          // Sadly we have to hide all errors while we pull data out of the
+          // tree. For some context see:
+          // https://github.com/dabit3/next-apollo-appsync/issues/12
+          const originalConsoleError = console.error
+          console.error = () => {}
   
           // Run all GraphQL queries
           await getDataFromTree(
@@ -52,6 +58,9 @@ export default (appSyncConfig) => {
               client: apollo
             }
           )
+
+          // Stop suppressing outputs
+          console.error = originalConsoleError
         } catch (error) {
           // Prevent Apollo Client GraphQL errors from crashing SSR.
           // Handle them in components via the data.error prop:
