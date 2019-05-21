@@ -1,5 +1,5 @@
 {
-  "name": "next-apollo-appsync",
+  "name": "@possibilities/next-apollo-appsync",
   "version": "0.0.7",
   "description": "Fork of next-apollo to enable AWS AppSync SSR Appsy",
   "main": "./dist/index.js",
